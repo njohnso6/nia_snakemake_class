@@ -1,0 +1,15 @@
+
+rule all:
+    input:
+        "output.txt"
+
+rule modify_and_reverse:
+    input:
+        "input.txt"
+    output:
+        "output.txt"
+    shell:
+        """
+        # Replace 'old_text' with 'new_text' in the input file, reverse the text, and save to output
+        sed 's/old_text/new_text/g' {input} | rev > {output}
+        """
