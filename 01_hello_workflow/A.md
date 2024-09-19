@@ -41,3 +41,28 @@ And, as usual in bash, each line in a multiline command should end in `\`
         rev {input} > {output} &&
         echo " I made my first rule!" >> {output}
         """
+```
+
+## Named inputs or outputs
+
+It is possible to have multiple input or output files. They can even be named! (Pretty much any parameter can be 
+named). Let's do that here. We'll augment our output with a file that uses your name, just for fun.
+Go ahead and make a new file called "my_name.txt" and put "My name is (your name) and ".
+
+```snakemake
+rule modify_and_reverse:
+    input:
+        hello="input.txt",
+        name="my_name.txt"
+    output:
+        "output.txt"
+    shell:
+        """
+        # reverse the text, and save to output
+        rev {input.hello} > {output} &&
+        cat {input.name} >> {output} &&
+        echo " I made my first rule!" >> {output}
+        """
+```
+Notice how each input "object" now has an attribute that we can reference by name.
+
