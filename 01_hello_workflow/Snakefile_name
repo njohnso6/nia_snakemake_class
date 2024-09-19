@@ -1,0 +1,13 @@
+rule modify_and_reverse:
+    input:
+        hello="input.txt",
+        name="name.txt"
+    output:
+        "output.txt"
+    shell:
+        """
+        # reverse the text, and save to output
+        rev {input.hello} > {output} &&
+        cat {input.name} >> {output} &&
+        echo " I made my first rule!" >> {output} &&
+        """
