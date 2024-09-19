@@ -41,20 +41,7 @@ make that thing happen. In this case, we need to tell Snakemake how to make the 
 
 ## Let's make our first error
 
-Try commenting out the 
-
-
-
-## Let's introduce the master rule
-
-Very important to know: in the chain of input to output files towards 
-the target rule, every output file must be unique. In other words, you 
-cannot modify a file and have the output have the same name. You will get
-some very mysterious errors if you try. This is because Snakemake works
-by creating a DAG. A directed acyclic graph. This is our DAG so far (show DAG).
-Having an input and output with the same name introduces a cycle into the graph and
-will confuse Snakemake.
-  General idea, we'll go by themes?
-Documentation, automation 
+Try commenting out all of the actions in the shell so no output is created. 
+Then run snakemake and see what happens.
 
   
