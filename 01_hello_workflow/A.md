@@ -47,7 +47,7 @@ And, as usual in bash, each line in a multiline command should end in `\`
 
 It is possible to have multiple input or output files. They can even be named! (Pretty much any parameter can be 
 named). Let's do that here. We'll augment our output with a file that uses your name, just for fun.
-Go ahead and make a new file called "my_name.txt" and put "My name is (your name) and ".
+Go ahead and make a new input file called "my_name.txt" that contains the text "My name is (your name) and ".
 
 ```snakemake
 rule modify_and_reverse:
