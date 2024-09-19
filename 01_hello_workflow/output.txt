@@ -1,1 +1,0 @@
-Hello, and welcome to my Snakemake class, world!
