@@ -1,4 +1,4 @@
-# Wildcards,Pattern Rules, and the Master Rule
+# Wildcards, Pattern Rules, and the Master Rule
 
 Here is where we will begin to talk about scalability. One of the most powerful features of Snakemake
 is the wildcard feature. It allows us to avoid repeating ourselves and to write D.R.Y. (Do Not Repeat Yourself) code.
