@@ -39,6 +39,8 @@ That's because every parameter we give to Snakemake merely tells Snakemake about
 Some other input from us will be required to
 make that thing happen. In this case, we need to tell Snakemake how to make the logs.
 
+NOTE: These must use the same wildcards as the output files. We'll cover wildcards momentarily.
+
 ## Let's make our first error
 
 Try commenting out all of the actions in the shell so no output is created. 
