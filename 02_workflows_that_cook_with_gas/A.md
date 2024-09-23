@@ -109,4 +109,12 @@ May need to install graphviz
 - Have two versions. One with full text and one with bullets for people who prefer to listen
 - Have sections and try best to have all the basic stuff out of the way on Monday so veterans can peace out and learn cool stuff Tuesday.
 - For the second half, just to save some time on making things just have links to Ryan's stuff to show it in action, and then have them build examples
+- dynamic resource assignment -> rule:
+    input:    ...
+    output:   ...
+  - benchmarking
+    resources:
+        mem_mb=lambda wc, input: max(2.5 * input.size_mb, 300)
+    shell:
+        "..."
 
