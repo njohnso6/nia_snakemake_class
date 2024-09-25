@@ -53,6 +53,11 @@ Using publicly made singularity containers, or importing Docker containers and r
 is highly recommended for the sake of reprodcibility, especially if you plan to share a pipeline. If one
 is available, it should generally be the first choice.
 
+Before using Singularity with Snakemake, you must have it in your path either in your environment
+or using `module load singularity`
+
+Don't forget to 
+
 To use a singularity container simply add it to your rule:
 ```
 rule hisat2:
