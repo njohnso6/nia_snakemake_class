@@ -74,6 +74,7 @@ rule hisat2:
             bai = "02aln/{sample}.bam.bai"
     singularity: "docker://dceoy/hisat2"
     shell: "code"
+```
 
 For even greater reproducibility it is always recommended to pair whatever you do with git.
 Any environment specification you use, or an output file detailing the exact version of your current 
