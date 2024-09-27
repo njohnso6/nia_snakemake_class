@@ -6,7 +6,3 @@ module load singularity
 module load conda
 ```
 
-Need to be able to get the below correct for the singularity container.
- snakemake --cores=4 --use-singularity \
-     --singularity-args '-B $PWD:/data --pwd /data' \
-     --singularity-prefix=00container
