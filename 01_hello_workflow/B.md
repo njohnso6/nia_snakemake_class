@@ -32,7 +32,9 @@ rule modify_and_reverse:
         time >> {log}
         """
 ```        
-Notice there must be a comma between items under the same parameter.
+There are several things to notice here.
+1. There must be a comma between items under the same parameter.
+2. Snakemake automatically makes intermediate directories (logs, in this case).
 
 Also notice how we aren't just telling Snakemake where to make the log and it makes it there.
 That's because every parameter we give to Snakemake merely tells Snakemake about the existence of something.
