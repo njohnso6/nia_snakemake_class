@@ -18,3 +18,5 @@ rule modify_and_reverse:
         """
 ```
 What is the result of this?
+
+Another common error is to forget the comma between the input or output items. Since Python concatenates subsequent strings, this can lead to unexpected behavior.
