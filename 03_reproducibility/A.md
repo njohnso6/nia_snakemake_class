@@ -81,10 +81,23 @@ rule hisat2:
     shell: "code"
 ```
 
+Depending on how the container is organized, you may have to fiddle with how exactly the directories inside
+the container are bound in relation to directories outside. That can be addressed with `--singularity-args` as in the following code.
+`--singularity-prefix` simply determines where the container that is downloaded is stored or where to search
+Need to be able to get the below correct for the singularity container.
+ ```
+ snakemake --cores=4 --use-singularity \
+     --singularity-args '-B $PWD:/data --pwd /data' \
+     --singularity-prefix=00container
+```
+
+
 For even greater reproducibility it is always recommended to pair whatever you do with git.
 Any environment specification you use, or an output file detailing the exact version of your current 
 environment is recommended to be committed and labeled alongside each publication-worthy analysis you
 do. So essentially any time you make a change, you should commit any config files or version outputs to git.
+
+
 
 IDEA: show an example of a fully pinned env specification.
 
