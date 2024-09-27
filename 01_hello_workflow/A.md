@@ -66,3 +66,15 @@ rule modify_and_reverse:
 ```
 Notice how each input "object" now has an attribute that we can reference by name.
 
+Borrowing from the Snakemake tutorial is the following rule:
+```
+rule bwa_map:
+    input:
+        "data/genome.fa",
+        "data/samples/A.fastq"
+    output:
+        "mapped_reads/A.bam"
+    shell:
+        "bwa mem {input} | samtools view -Sb - > {output}"
+```
+Notice how all the input files can be provided at once to bwa mem simply with {input}
