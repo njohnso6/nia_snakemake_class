@@ -45,6 +45,7 @@ Don't worry. The above won't work just yet. We still need a target rule definiti
 - when referred to within a rule action, wildcards are treated the same as either "input" or "output" and must be referenced through an attribute.
 - the expand function actually permutes the path string and all strings in SAMPLES.
 - Instead of listing every letter of SAMPLES, we can do `SAMPLES = glob_wildcards("data/{sample}.txt").sample`
+- If there are multiple output files, ALL of them MUST use the same wildcards.
 
 
 
