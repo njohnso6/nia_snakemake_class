@@ -1,0 +1,33 @@
+# First, define the samples you want to process
+#SAMPLES = ["A", "B", "C"]
+SAMPLES = glob_wildcards("data/{sample}.txt").sample
+
+# Rule all defines the final output of the pipeline.
+rule all:
+    input:
+        "combined_results.txt"  # Final output, combining all processed samples
+
+# Rule to process each sample
+rule process_sample:
+    input:
+        "data/{sample}.txt"  # Input is a text file corresponding to each sample
+    output:
+        "results/{sample}_processed.txt"  # Output is the processed file for each sample
+    shell:
+        """
+        # Simulate processing (for example, copying the input to output)
+        echo "Processing {wildcards.sample}" > {output}
+        cat {input} >> {output}
+        """
+
+# Rule to combine all the processed results into a single file
+rule combine_results:
+    input:
+        expand("results/{sample}_processed.txt", sample=SAMPLES)  # Use expand to get all processed sample files
+    output:
+        "combined_results.txt"  # The final combined file
+    shell:
+        """
+        # Concatenate all processed sample files into one combined file
+        cat {input} > {output}
+        """
