@@ -12,3 +12,12 @@ user@cn1234> cd snakemake-class
 ```
 
 We will use some of these items for exercises during class.
+
+Setup will be different on other systems.
+
+When you are ready run the setup script to fetch data and create all files
+necessary for the exercies.
+
+```console
+user@cn1234> ./setup.sh
+...
