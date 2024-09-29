@@ -1,8 +1,14 @@
-Begin an sinteractive session if you have not already.
-In a separate directory, run 
+On the NIH HPC systems, start an interactive session, load the snakemake and
+singularity modules, and clone this repository:
 
-`git clone https://github.com/NIH-HPC/snakemake-class.git` then:
-- cd into it snakemake-class
-- run `.setup.sh/`
+```console
+user@headnode> sinteractive --cpus-per-task=12 --mem=24g --gres=lscratch:20
+...
+user@cn1234> ## change to a suitable directory somewhere in /data
+user@cn1234> cd /data/$USER
+user@cn1234> module load git
+user@cn1234> git clone https://github.com/NIH-HPC/snakemake-class.git
+user@cn1234> cd snakemake-class
+```
 
-This will set up all the necessary files and singularity containers.
+We will use some of these items for exercises during class.
