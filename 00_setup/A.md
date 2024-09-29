@@ -19,5 +19,5 @@ When you are ready run the setup script to fetch data and create all files
 necessary for the exercies.
 
 ```console
-user@cn1234> ./setup.sh
+user@cn1234> nohup ./setup.sh
 ...
