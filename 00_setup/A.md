@@ -11,6 +11,8 @@ user@cn1234> git clone https://github.com/NIH-HPC/snakemake-class.git
 user@cn1234> cd snakemake-class
 ```
 
+
+
 We will use some of these items for exercises during class.
 
 Setup will be different on other systems.
