@@ -45,6 +45,7 @@ Don't worry. The above won't work just yet. We still need a target rule definiti
 - when referred to within a rule action, wildcards are treated the same as either "input" or "output" and must be referenced through an attribute.
 - the expand function actually permutes the path string and all strings in SAMPLES.
 - Instead of listing every letter of SAMPLES, we can do `SAMPLES = glob_wildcards("data/{sample}.txt").sample`
+- If there are multiple output files, ALL of them MUST use the same wildcards.
 
 
 
@@ -91,17 +92,23 @@ rule samtools_sort:
         "samtools sort -T sorted_reads/{wildcards.sample} "
         "-O bam {input} > {output}
 ```
+Notice the output is still a bam with the same name, so we put it in a separate folder.
+
+There are better ways of dealing with intermediate files we'll talk about tomorrow.
 We'll talk more about dealing with temporary and intermediate files tomorrow.
 But it's good to point out now that it is better to avoid having intermediate files written to disk
 for Biowulf's sake as well as for efficiency.
 
-## The DAG
 
-Create your own with `snakemake --forceall --rulegraph | dot -Tpdf > dag_rulegraph.pdf`
-May need to install graphviz
+## Keeping House
 
-![dag_rulegraph](https://github.com/user-attachments/assets/bee97cbd-049a-4889-9ed4-3da6b5d790c3)
+You may have noticed Snakemake will not run when all the files it is supposed to create already exist.
+Rather than deleting them by hand, we can make a rule to clean them up.
 
+```snakemake
+rule clean:
+    shell: "rm {rules.all.input}"
+```
 
 ## IDEAS
 - General idea, we'll go by themes?
