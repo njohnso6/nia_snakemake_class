@@ -80,5 +80,4 @@ rule bwa_map:
 Notice how all the input files can be provided at once to bwa mem simply with {input}
 
 NOTE:
-This has probably already been said, and will be said again.
 It is best practice to have subsequent steps of a workflow in separate, unique, output folders. This keeps the working directory structured. Further, such unique prefixes allow Snakemake to quickly discard most rules in its search for rules that can provide the requested input. This accelerates the resolution of the rule dependencies in a workflow.
