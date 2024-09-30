@@ -109,3 +109,4 @@ rule clean:
 ```
 
 Notice the cool magic I did there! I can refer to any rule and different parts of it.
+Of course, you can be less destructive if you choose to be.
