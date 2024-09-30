@@ -73,7 +73,7 @@ rule process_tsv:
 rule all:
     input:
         "results/csv/sample1_processed.txt",
-        "results/tsv/sample2_processed.txt"
+        "results/tsv/sample2_processed.txt" # notice each of these is produced in a separate output folder
 
 rule process_csv:
     input:
