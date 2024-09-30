@@ -1,4 +1,12 @@
+# Practice
 
+Try and recreate the DAG in B.md using all processing all three text files in data.
+
+Try to use the glob_wildcards feature when assigning the global variable with sample names.
+
+Don't forget to create some kind of logging!
+
+A possible solution is found in Snakefile.final
 
 
 **The following exercise is for more practice but uses some features like singularity containers and a profile we haven't talked about yet. **
