@@ -69,6 +69,40 @@ rule all:
 The input of that rule may require the output of another rule. Thus, Snakemake is commonly
 understood to "work backwards". Working backwards allows it to disambiguate wildcards.
 
+**The final result will look like this**:
+
+```snakemake
+# Rule all defines the final output of the pipeline.
+rule all:
+    input:
+        "combined_results.txt"  # Final output, combining all processed samples
+
+# Rule to process each sample
+rule process_sample:
+    input:
+        "data/{sample}.txt"  # Input is a text file corresponding to each sample
+    output:
+        "results/{sample}_processed.txt"  # Output is the processed file for each sample
+    shell:
+        """
+        # Simulate processing (for example, copying the input to output)
+        echo "Processing {wildcards.sample}" > {output}
+        cat {input} >> {output}
+        """
+
+# Rule to combine all the processed results into a single file
+rule combine_results:
+    input:
+        expand("results/{sample}_processed.txt", sample=SAMPLES)  # Use expand to get all processed sample files
+    output:
+        "combined_results.txt"  # The final combined file
+    shell:
+        """
+        # Concatenate all processed sample files into one combined file
+        cat {input} > {output}
+        """
+```
+
 **Important**: in the chain of input to output files towards 
 the target rule, every output file path must be unique. In other words, you 
 cannot modify a file and have the output have the same name. You will get
@@ -98,21 +132,3 @@ There are better ways of dealing with intermediate files we'll talk about tomorr
 We'll talk more about dealing with temporary and intermediate files tomorrow.
 But it's good to point out now that it is better to avoid having intermediate files written to disk
 for Biowulf's sake as well as for efficiency.
-
-
-## IDEAS
-- General idea, we'll go by themes?
-- Documentation, automation
-- Have two versions. One with full text and one with bullets for people who prefer to listen
-- Have sections and try best to have all the basic stuff out of the way on Monday so veterans can peace out and learn cool stuff Tuesday.
-- For the second half, just to save some time on making things just have links to Ryan's stuff to show it in action, and then have them build examples
-- dynamic resource assignment -> rule:
-    input:    ...
-    output:   ...
-  - benchmarking
-    resources:
-        mem_mb=lambda wc, input: max(2.5 * input.size_mb, 300)
-    shell:
-        "..."
-  - --jobname "s.{rulename}.{jobid}.sh" \
-
