@@ -17,8 +17,8 @@ user@cn1234> cd nia_snakemake_class
 
 Normally, I would say it's not cool to hog all those resources for this but it will make our class easier when things come up and so you can experiment during class.
 
-Then, create a separate folder called exercises.
-and clone the exercises repository in a different repo. These will supplement the exercises 
+Then, create a separate folder called exercises. Enter it and
+clone the exercises there. These will supplement the exercises 
 we run in class.
 
 ```console
