@@ -1,4 +1,4 @@
-# Helpful Commands
+# Helpful Flags
 
 When running and debugging Snakemake, there are a number of commands that will make your life much easier.
 
