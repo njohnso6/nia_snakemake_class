@@ -11,12 +11,14 @@ Sometimes we run into issues likes this where there are two filetypes that need 
 
 It would be unwieldly to append the type of original file to the new file. But it must be differentiated somehow. 
 
-Try creating a new Snakefile in this dirrectory with this code and see what happens.
+Try creating a new Snakefile in this directory with this code and see what happens.
 
 ```snakemake
+SAMPLES = ['sample1', 'sample2']
+
 rule all:
     input:
-        "results/sample_processed.txt"
+        expand("results/{sample}_processed.txt", sample=SAMPLES)
 
 rule process_csv:
     input:
@@ -42,9 +44,11 @@ There are two options:
 ```snakemake
 ruleorder: process_csv > process_tsv
 
+SAMPLES = ['sample1', 'sample2']
+
 rule all:
     input:
-        "results/sample_processed.txt"
+        expand("results/{sample}_processed.txt", sample=SAMPLES)
 
 rule process_csv:
     input:
@@ -68,12 +72,12 @@ rule process_tsv:
 ```snakemake
 rule all:
     input:
-        "results/csv/sample_processed.txt",
-        "results/tsv/sample_processed.txt"
+        "results/csv/sample1_processed.txt",
+        "results/tsv/sample2_processed.txt"
 
 rule process_csv:
     input:
-        "data/{sample}.csv"
+        "data/pre_samples/{sample}.csv"
     output:
         "results/csv/{sample}_processed.txt"
     shell:
@@ -81,7 +85,7 @@ rule process_csv:
 
 rule process_tsv:
     input:
-        "data/{sample}.tsv"
+        "data/pre_samples/{sample}.tsv"
     output:
         "results/tsv/{sample}_processed.txt"
     shell:
