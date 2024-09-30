@@ -93,7 +93,7 @@ In other circumstances it may be wise to constrain wildcards. The following exam
 Consider the output file {sample}.{group}.txt and assume that the target file is A.1.normal.txt. It is not clear whether dataset="A.1" and group="normal" or dataset="A" and group="1.normal" is the right assignment. Here, constraining the dataset wildcard by {sample,[A-Z]+}.{group} solves the problem.
 
 
-## Requesting particular output
+## Running workflow subsets
 
 Sometimes running the entire workflow isn't desired. For example, while debugging. 
 
