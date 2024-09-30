@@ -97,3 +97,15 @@ Notice how all the input files can be provided at once to bwa mem simply with {i
 
 NOTE:
 It is best practice to have subsequent steps of a workflow in separate, unique, output folders. This keeps the working directory structured. Further, such unique prefixes allow Snakemake to quickly discard most rules in its search for rules that can provide the requested input. This accelerates the resolution of the rule dependencies in a workflow.
+
+## Keeping House
+
+You may have noticed Snakemake will not run when all the files it is supposed to create already exist.
+Rather than deleting them by hand, we can make a rule to clean them up.
+
+```snakemake
+rule clean:
+    shell: "rm {rules.all.input}"
+```
+
+Notice the cool magic I did there! I can refer to any rule and different parts of it.
