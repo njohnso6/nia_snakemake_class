@@ -13,11 +13,14 @@ rule process_sample:
         "data/{sample}.txt"  # Input is a text file corresponding to each sample
     output:
         "results/{sample}_processed.txt"  # Output is the processed file for each sample
+    log: "logs/process_sample_{sample}.log"
     shell:
         """
         # Simulate processing (for example, copying the input to output)
-        echo "Processing {wildcards.sample}" > {output}
-        cat {input} >> {output}
+        echo "Processing {wildcards.sample}" > {output} &&
+        cat {input} >> {output} &&
+        echo "processed {wildcards.sample}" > {log} &&
+        time >> {log}
         """
 
 # Rule to combine all the processed results into a single file
@@ -26,8 +29,11 @@ rule combine_results:
         expand("results/{sample}_processed.txt", sample=SAMPLES)  # Use expand to get all processed sample files
     output:
         "combined_results.txt"  # The final combined file
+    log: "logs/combined_results_{sample}.log"
     shell:
         """
         # Concatenate all processed sample files into one combined file
-        cat {input} > {output}
+        cat {input} > {output} &&
+        echo "processed {wildcards.sample}" > {log} &&
+        time >> {log}
         """
