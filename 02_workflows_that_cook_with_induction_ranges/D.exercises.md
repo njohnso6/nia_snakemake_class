@@ -1,14 +1,14 @@
 ## Add a new rule to count RNA-Seq reads per gene
 
 **Goal:** Add a new rule that summarizes the count of RNA-Seq reads per gene
-for all 6 samples. The starting point, as before, is `Snakefile` and an example
+for all 6 samples. The starting point is `Snakefile` and an example
 of a finished workflow is provided in `Snakefile.finished`
 
 
 ### Add the featureCounts rule
 
 `featureCounts` from the subread package is used to count the number of reads
-from each alignment mapping to each gene. It's **inputs** are a bam file and
+from each alignment mapping to each gene. Its **inputs** are a bam file and
 the annotation file `00ref/R64-1-1.genes.gtf`. It's **output** is a per sample
 count file in the `04count` directory. It's expected to use 4GB of memory and
 run 2 threads.
