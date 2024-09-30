@@ -37,9 +37,9 @@ To run a rule, simply run ``snakemake --cores 2`.
 
 You can replace the number of cores with however many you have handy or want to give the job.
 
-If you have multiple Snakefiles, you can choose the Snakefile you want to run with "-S" 
+If you have multiple Snakefiles, you can choose the Snakefile you want to run with "-s" or "--snakefile" 
 ```bash
-snakemake -S other_snakefile
+snakemake -s other_snakefile
 ```
 
 ## Chaining commands
