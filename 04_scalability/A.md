@@ -41,3 +41,5 @@ I like to creat submission scripts, as there are often multiple arguments in add
 snakemake --use-singularity --use-envmodules --use-conda -S testing_snakefile
 ```
 
+NOTE: Those using student accounts will need to specify --partition=student for all jobs submitted to the cluster.
+
