@@ -7,6 +7,9 @@ As mentioned earlier, all rules have an input, and most have an output and an ac
 There are multiple types of actions that accomodate script files, python code, or shell commands.
 Here, we'll start with the shell command to run some bash commands.
 
+Create a file called Snakefile. Snakemake always searches for a file called Snakefile.
+Put the following into it:
+
 ```snakemake
 rule modify_and_reverse:
     input:
@@ -20,11 +23,24 @@ rule modify_and_reverse:
         """
 ```
 
-The input.txt file contains "Hello World!" but backwards! This rule will quickly right it.
+I have already created a file called "input.txt" -- it contains "Hello World!" but backwards! This rule will quickly right it.
 
 You may notice "input.txt" is in quotes, whereas output is in brackets. This is simply to show that 
 variables can be hardcoded into a script or they can reused. A variable can be referred to anywhere in
 the shell section by enclosing it in curly braces. Please fix that now.
+
+## Running a rule
+Before running a rule, always check whether it will work and what will happen:
+`snakemake -n`. If you see red, something is wrong and needs fixing.
+
+To run a rule, simply run ``snakemake --cores 2`.
+
+You can replace the number of cores with however many you have handy or want to give the job.
+
+If you have multiple Snakefiles, you can choose the Snakefile you want to run with "-S" 
+```bash
+snakemake -S other_snakefile
+```
 
 ## Chaining commands
 
