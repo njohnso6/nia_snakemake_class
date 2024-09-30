@@ -29,11 +29,10 @@ rule combine_results:
         expand("results/{sample}_processed.txt", sample=SAMPLES)  # Use expand to get all processed sample files
     output:
         "combined_results.txt"  # The final combined file
-    log: "logs/combined_results_{sample}.log"
+    log: "logs/combined_results.log"
     shell:
         """
         # Concatenate all processed sample files into one combined file
         cat {input} > {output} &&
-        echo "processed {wildcards.sample}" > {log} &&
         time >> {log}
         """
