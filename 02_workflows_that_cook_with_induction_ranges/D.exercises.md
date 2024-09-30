@@ -1,3 +1,9 @@
+
+
+
+**The following exercise is for more practice but uses some features like singularity containers and a profile we haven't talked about yet. **
+Feel free to remove the resource parts parts. They must be done in the exercise03 folder of the exercises set, however. If you choose to run them, simply run `module load singularity` before running it and remove the "resources" section.
+
 ## Add a new rule to count RNA-Seq reads per gene
 
 **Goal:** Add a new rule that summarizes the count of RNA-Seq reads per gene
