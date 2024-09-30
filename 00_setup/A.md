@@ -22,8 +22,6 @@ clone the exercises there. These will supplement the exercises
 we run in class.
 
 ```console
-user@headnode> 
-...
 user@cn1234> mkdir exercises
 user@cn1234> cd exercises/
 user@cn1234> git clone https://github.com/NIH-HPC/snakemake-class.git
@@ -38,6 +36,6 @@ necessary for the exercies.
 
 ```console
 user@cn1234> nohup ./setup.sh
-...
+```
 
 
