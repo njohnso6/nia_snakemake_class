@@ -100,16 +100,6 @@ But it's good to point out now that it is better to avoid having intermediate fi
 for Biowulf's sake as well as for efficiency.
 
 
-## Keeping House
-
-You may have noticed Snakemake will not run when all the files it is supposed to create already exist.
-Rather than deleting them by hand, we can make a rule to clean them up.
-
-```snakemake
-rule clean:
-    shell: "rm {rules.all.input}"
-```
-
 ## IDEAS
 - General idea, we'll go by themes?
 - Documentation, automation
