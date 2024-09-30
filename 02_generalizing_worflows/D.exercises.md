@@ -8,6 +8,7 @@ Don't forget to create some kind of logging!
 
 A possible solution is found in Snakefile.final
 
+The data for this exercise are in the data directory. The files A.txt, B.txt, and C.txt
 
 **The following exercise is for more practice but uses some features like singularity containers and a profile we haven't talked about yet. **
 Feel free to remove the resource parts parts. They must be done in the exercise03 folder of the exercises set, however. If you choose to run them, simply run `module load singularity` before running it and remove the "resources" section.
