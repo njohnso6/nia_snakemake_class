@@ -1,6 +1,3 @@
-Do multiple inputs
-Then logs
-
 # Log Files
 
 These early lessons are particularly about establishing good Snakemake habits
