@@ -130,7 +130,7 @@ rule hisat2:
     output: bam = "02aln/{sample}.bam",
             bai = "02aln/{sample}.bam.bai"
     envmodules:
-            "hisat2/2.2.1"
+            "hisat2/2.2.1", "samtools"
     shell: "Loreum ispum code do not run"
 ```
 Notice the exact version is specified -- Biowulf may change the default version at any time, so it's smart to specify the version so it will break if it's not there.
@@ -142,7 +142,7 @@ Let's modify our Snakefile.final in exercise02 again.
 Replace the singularity requirement with envmodules.
 
 ```bash
- snakemake --cores=4 --use-singularity  --singularity-prefix=00container -s Snakefile.finished
+ snakemake --cores=4 --use-envmodules  -s Snakefile.finished
 ```
 
 ## Conda
