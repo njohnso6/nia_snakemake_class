@@ -75,9 +75,14 @@ rule hisat2:
     shell: "Lorum ipsum code do not run"
 ```
 
-Before running 
+Before running run:
+```bash
+source /usr/local/current/singularity/app_conf/sing_binds
+```
 
-Depending on how the container is organized, you may have to fiddle with how exactly the directories inside
+This should prevent problems by giving the container the interface points it needs with your operating system and your file system.
+
+However, depending on how the container is organized, you may have to fiddle with how exactly the directories inside
 the container are bound in relation to directories outside. That can be addressed with the `--singularity-args` when running snakemake, as in the following code.
 `--singularity-prefix` simply determines where the container that is downloaded is stored or where to search for a container if you already have one downloaded.
 Here is an example.
