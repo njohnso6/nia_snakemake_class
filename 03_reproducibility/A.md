@@ -180,12 +180,6 @@ do. So essentially any time you make a change, you should commit any config file
 
 
 
-IDEA: show an example of a fully pinned env specification.
-
-To do that, consider making a rule at the end that triggers a git commit any time one of your environments changes,
-or simply make sure those files are tracked by git.
-
-
 
 
 
