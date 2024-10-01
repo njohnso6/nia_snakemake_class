@@ -10,7 +10,7 @@ By doing this, your analysis is not just a "black box" but something others can 
 
 ## Why are environments critical to reproducibility?
 
-Bioinformatics projects depend on multiple interconnected libraries. Sometimes these libraries have conflicting requirements (e.g., one library needs a specific version of Python or another library). Without a controlled environment, managing these dependencies manually can be a nightmare, leading to version conflicts or broken installations. Environments like Conda The trick is to isolate each project's dependencies. This isolation prevents issues like "dependency hell," where upgrading one package for one project breaks another project that relies on an older version of the same package.
+Bioinformatics projects depend on multiple interconnected libraries. Sometimes these libraries have conflicting requirements (e.g., one library needs a specific version of Python or another library). Without a controlled environment, managing these dependencies manually can be a nightmare, leading to version conflicts or broken installations. The trick is to isolate each project's dependencies. This isolation prevents issues like "dependency hell," where upgrading one package for one project breaks another project that relies on an older version of the same package.
 
 It's not just the code or the libraries that matter but the entire software, and even hardware, stack, including compilers, interpreters (e.g., specific versions of Python or R), system libraries, and even hardware dependencies (like CUDA for GPU-based computation). 
 
