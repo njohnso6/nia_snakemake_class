@@ -13,6 +13,8 @@ It can get pretty pretty cumbersome to re-type all the parameters for snakemake.
 A profile specified by name on the command line is searched for in $HOME/.config/snakemake. Alternatively profiles can be specified by path: 
 `snakemake --cores 8 --profile ~/snakemake_profile`
 
+If you do all of the exercises in the exercise folder, know that some use a profile that is a little out of date. Not a huge deal.
+
 There is a Biowulf-specific profile that contains all the boilerplate code to make deploying large-scale workflows to Biowulf simple.
 
 In your home directory, go ahead and clone Biowulf's Snakemake profile
