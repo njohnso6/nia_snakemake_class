@@ -144,9 +144,15 @@ It is not as ideal as Singularity because:
 - an environment specified in conda becomes less portable as it becomes more specific (e.g. Python=3.8 instead of Python = 3)
 - the workflow may work differently because of less specific package versions
 
+Let's take a look at the file in this folder called fully_pinned_example.yml
+
+Such a spcific environment would be unlikely to build on a machine other than Biowulf
+
 Snakemake allows environments for each rule to be specified, if desired.
-There are other ways to use Conda in Snakemake but this is the most recommended way becuase a written record exists for each rule
-and if the environment specifications are version controlled anyone can track how the environment has changed over time.
+There are other ways to use Conda in Snakemake but this is the most recommended way becuase:
+- a written record exists for each rule
+- this allows the environment specifications to be version-controlled
+- including only the necessary packages for each rule increases the liklihoodmore specific versions can be used
 
 Go back to exercise01 in the exercise folder
 
