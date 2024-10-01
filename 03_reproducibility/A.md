@@ -1,9 +1,81 @@
-# Reproducibility using Envmodules, Conda and Singularity
+# Environments Support Reproducibility
 
-There are several ways to ensure reproducibility of workflows. Some are better than others.
-1. Use the system modules. We'll go over how to do that.
-2. Use a package manager such as Conda (please use the mamba solver, for your own sanity)
-3. Use Singularity
+Suppose you’re conducting an RNA-Seq project using the ROSMAP dataset. Reproducibility means that:
+
+The data set you used is publicly available or properly documented.
+You share the exact scripts that you used for processing the files (e.g., removing adapters, running DESeq2).
+You document your software environment (e.g., R version 4.4, specific libraries such DESeq2 Release (3.19)).
+When someone else runs your code with the same data and environment, they get the same results.
+By doing this, your analysis is not just a "black box" but something others can verify, extend, or adapt.
+
+## Why are environments critical to reproducibility?
+
+Bioinformatics projects depend on multiple interconnected libraries. Sometimes these libraries have conflicting requirements (e.g., one library needs a specific version of Python or another library). Without a controlled environment, managing these dependencies manually can be a nightmare, leading to version conflicts or broken installations. Environments like Conda The trick is to isolate each project's dependencies. This isolation prevents issues like "dependency hell," where upgrading one package for one project breaks another project that relies on an older version of the same package.
+
+It's not just the code or the libraries that matter but the entire software, and even hardware, stack, including compilers, interpreters (e.g., specific versions of Python or R), system libraries, and even hardware dependencies (like CUDA for GPU-based computation). 
+
+Especially given the hardware and firmware dependency, some environment types are better than others. Software environments allow users to specify and capture the entire stack required for the project. This ensures that the code runs in the same environment, even if your local machine changes or the software ecosystem evolves.
+
+## Reproducibility using Envmodules, Conda and Singularity
+
+There are several ways to integrate reproducible environments into Snakemake:
+1. Use Singularity containers
+2. Use Biowulf modules
+3. The Conda package manager
+4. Other package managers (less explicit support for this)
+
+## Singularity Containers
+
+![image](https://github.com/user-attachments/assets/bfa52abe-aa4c-4baa-8dd7-08967aeb5165)
+Image taken from: https://stephen-odaibo.medium.com/docker-containers-python-virtual-environments-virtual-machines-d00aa9b8475
+
+In most cases, Singularity environments are the ideal environment on Biowulf. Whereas a virtual environment like Conda
+must be used on the same operating system on which it's built, a container can 
+be used on different operating systems and is therefore more flexible. 
+The exact version of R might change slightly when installed directly on a machine to match the operating system, but a container will contain the same version regardless of the machine it's on.
+Advantages:
+1. Can be passed to collaborators on other computer systems with the exact same version
+2. More or less immutable--prevents unexpected changes
+
+Using publicly made singularity containers, or importing Docker containers and running with singularity
+is highly recommended for the sake of reprodcibility, especially if you plan to share a pipeline. If one
+is available, it should generally be the first choice.
+
+Before using Singularity with Snakemake, you must have it in your path either in your environment
+or using `module load singularity`
+
+To use a singularity container simply add it to your rule:
+```
+rule hisat2:
+    input: fq = "00fastq/{sample}.fastq.gz",
+           idx = "00ref/hisat_index/R64-1-1"
+    output: bam = "02aln/{sample}.bam",
+            bai = "02aln/{sample}.bam.bai"
+    singularity:
+        "library://wresch/classes/rnaseq:0.6"
+    shell: "code"
+```
+If it is a Docker container you found somewhere online, simply take the user and package name listed in the pull command and prepend
+the path with 'docker://'
+<img width="572" alt="Screenshot 2024-09-30 at 8 36 50 PM" src="https://github.com/user-attachments/assets/553bb8c2-4a81-453d-aec5-6df5379787d4">
+```
+rule hisat2:
+    input: fq = "00fastq/{sample}.fastq.gz",
+           idx = "00ref/hisat_index/R64-1-1"
+    output: bam = "02aln/{sample}.bam",
+            bai = "02aln/{sample}.bam.bai"
+    singularity: "docker://dceoy/hisat2"
+    shell: "code"
+```
+
+Depending on how the container is organized, you may have to fiddle with how exactly the directories inside
+the container are bound in relation to directories outside. That can be addressed with the `--singularity-args` when running snakemake, as in the following code.
+`--singularity-prefix` simply determines where the container that is downloaded is stored or where to search for a container if you already have one downloaded.
+ ```
+ snakemake --cores=4 --use-singularity \
+     --singularity-args '-B $PWD:/data --pwd /data' \
+     --singularity-prefix=00container
+```
 
 ## Using Biowulf modules
 Using system modules helps maintain a low system footprint and makes things easy.
@@ -22,7 +94,7 @@ rule hisat2:
 ```
 Notice the exact version is specified -- Biowulf may change the default version at any time.
 
-Unfortunately, workflows using these cannot be published for the wider community, and Biowulf may not have the tool
+Unfortunately, workflows using that use Biowulf modules cannot be published to the wider community. Further, Biowulf may not have the tool
 you need.
 
 ## Conda
@@ -42,54 +114,6 @@ Using Snakemake helps with both of these problems.
 
 Snakemake provides an easy way to deal with the first problem. 
 The second problem can only be dealt with using Singularity containers.
-
-## Singularity Containers
-
-Singularity containers are fully contained systems including the operating system and allow 
-virtualization of basically any computation. Containers can be made with all sorts of software,
-and they can be guaranteed not to change without explicit updating and therefore allow better versioning.
-
-Using publicly made singularity containers, or importing Docker containers and running with singularity
-is highly recommended for the sake of reprodcibility, especially if you plan to share a pipeline. If one
-is available, it should generally be the first choice.
-
-Before using Singularity with Snakemake, you must have it in your path either in your environment
-or using `module load singularity`
-
-Don't forget to 
-
-To use a singularity container simply add it to your rule:
-```
-rule hisat2:
-    input: fq = "00fastq/{sample}.fastq.gz",
-           idx = "00ref/hisat_index/R64-1-1"
-    output: bam = "02aln/{sample}.bam",
-            bai = "02aln/{sample}.bam.bai"
-    singularity:
-        "library://wresch/classes/rnaseq:0.6"
-    shell: "code"
-```
-
-If it is a Docker container you found somewhere, simply prepend the path with 'docker://'
-```
-rule hisat2:
-    input: fq = "00fastq/{sample}.fastq.gz",
-           idx = "00ref/hisat_index/R64-1-1"
-    output: bam = "02aln/{sample}.bam",
-            bai = "02aln/{sample}.bam.bai"
-    singularity: "docker://dceoy/hisat2"
-    shell: "code"
-```
-
-Depending on how the container is organized, you may have to fiddle with how exactly the directories inside
-the container are bound in relation to directories outside. That can be addressed with `--singularity-args` as in the following code.
-`--singularity-prefix` simply determines where the container that is downloaded is stored or where to search
-Need to be able to get the below correct for the singularity container.
- ```
- snakemake --cores=4 --use-singularity \
-     --singularity-args '-B $PWD:/data --pwd /data' \
-     --singularity-prefix=00container
-```
 
 
 For even greater reproducibility it is always recommended to pair whatever you do with git.
