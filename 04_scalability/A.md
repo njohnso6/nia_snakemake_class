@@ -5,10 +5,11 @@ workflows to HPC clusters. Let's take a look at the important pieces!
 
 ## Profiles
 
-It can get pretty pretty cumbersome to re-type all the parameters for snakemake. Snakemake profiles can set default values for command line parameters. A profile is a directory containing at a minimum a config.yaml with keys corresponding to command line flags. A profile specified by name on the command line is search for in $HOME/.config/snakemake. Alternatively profiles can be specified by path: 
+It can get pretty pretty cumbersome to re-type all the parameters for snakemake. Snakemake profiles can set default values for command line parameters. A profile is a directory containing at a minimum a config.yaml with keys corresponding to command line flags. 
+A profile specified by name on the command line is searched for in $HOME/.config/snakemake. Alternatively profiles can be specified by path: 
 `snakemake --cores 8 --profile ~/snakemake_profile`
 
-There is a Biowulf-specific profile that contains all the biolerplate code to make deploying large-scale workflows to Biowulf simple.
+There is a Biowulf-specific profile that contains all the boilerplate code to make deploying large-scale workflows to Biowulf simple.
 
 In your home directory, go ahead and clone Biowulf's Snakemake profile
 ```
