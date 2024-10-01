@@ -48,7 +48,11 @@ is available, it should generally be the first choice.
 Before using Singularity with Snakemake, you must have it in your path either in your environment
 or using `module load singularity`
 
+Let's take a look at our exercises in exercise01.
+
 To use a singularity container simply add it to your rule:
+
+You should see the following rule in 
 ```
 rule hisat2:
     input: fq = "00fastq/{sample}.fastq.gz",
@@ -56,7 +60,7 @@ rule hisat2:
     output: bam = "02aln/{sample}.bam",
             bai = "02aln/{sample}.bam.bai"
     singularity:
-        "library://wresch/classes/rnaseq:0.6"
+        "library://wresch/classes/rnaseq:0.8"
     shell: "Lorum ipsum code do not run"
 ```
 If it is a Docker container you found somewhere online, simply look for the pull command and take the user and package name listed. Prepend them with `'docker://'` and add the result to the singularity item in your rule.
@@ -64,7 +68,7 @@ If it is a Docker container you found somewhere online, simply look for the pull
 
 <img width="572" alt="Screenshot 2024-09-30 at 8 36 50 PM" src="https://github.com/user-attachments/assets/553bb8c2-4a81-453d-aec5-6df5379787d4">
 
-
+This is an example. It is not the correct version for our samples so do not use this docker.
 ```
 rule hisat2:
     input: fq = "00fastq/{sample}.fastq.gz",
