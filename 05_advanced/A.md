@@ -1,7 +1,7 @@
 # Being a good Biowulf Citizen
 
 Snakemake makes launching a slew of 1000s of jobs as easy as hitting a few keys.
-Unfortunately, what feels best for you is not always the best for other Biowulf users.
+Unfortunately, what feels best for you is not always the best for other Biowulf users (or yourself).
 
 <img width="999" alt="Screenshot 2024-09-26 at 1 21 01 PM" src="https://github.com/user-attachments/assets/fab0b47c-1a94-45c0-88d8-d7b4fc811d58">
 
@@ -18,7 +18,13 @@ Please refer to this [presentation](https://hpc.nih.gov/training/handouts/effect
 There are a number of ways to accomplish this:
 
 ## 1. Combine several jobs into one:
-The enchanced RSeQC rule will look something like this:
+A similarly enchanced workflow will look something like this:
+
+In this case we have three jobs that depend on the sorted alignments (bams) and sorted indicies (bais):
+1. infer_experiment
+2. geneBody_coverage check
+3. Wig file generation
+```snakemake
 rule rseqc:
     """
     post-process the sorted bam file.
@@ -38,7 +44,7 @@ rule rseqc:
     resources: mem_mb = 4096
     params: tmp_bam = lambda wc: "/tmp/{s}.bam".format(s=wc.sample)
     singularity:
-        "library://wresch/classes/rnaseq:0.6"
+        "library://wresch/classes/rnaseq:0.8"
     shell:
         """
         cp {input.bam} {input.bai} /tmp
@@ -48,4 +54,8 @@ rule rseqc:
         bam2wig.py -i {params.tmp_bam} -s {input.gs} \
                 -o $(echo {output.wig} | sed 's/.wig//') -t 1000000 -u
         """
-In this example, several jobs and outputs were collapsed under one job. Writing files out is avoided by copying the bam file to local memory and repeatedly using it.
+```
+In this example, notice we avoided reading the bam (sorted alignment) and sorted index (bai) files multiple times.
+Instead, we copied them to a temp directory.
+
+- 
