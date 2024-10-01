@@ -5,6 +5,10 @@ workflows to HPC clusters. Let's take a look at the important pieces!
 
 ## Profiles
 
+These are a game changer for Snakemake!
+
+I won't take you through a tour of the Dark Ages of Snakemake. Just trust me.
+
 It can get pretty pretty cumbersome to re-type all the parameters for snakemake. Snakemake profiles can set default values for command line parameters. A profile is a directory containing at a minimum a config.yaml with keys corresponding to command line flags. 
 A profile specified by name on the command line is searched for in $HOME/.config/snakemake. Alternatively profiles can be specified by path: 
 `snakemake --cores 8 --profile ~/snakemake_profile`
