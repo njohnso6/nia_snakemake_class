@@ -44,6 +44,7 @@ rule example_script:
 ```
 
 In a separate script called `process_data.py` we can then put
+
 ```python
 # This script receives `input`, `output`, `params`, etc. from Snakemake
 
