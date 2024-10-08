@@ -4,7 +4,7 @@ Snakemake is based around rules. The first rule in a snakefile is always the fir
 
 Let's start by creating our very first rule!
 As mentioned earlier, all rules have an input, and most have an output and an action.
-There are multiple types of actions that accomodate script files, python code, or shell commands.
+There are multiple types of actions that accommodate script files, python code, or shell commands.
 Here, we'll start with the shell command to run some bash commands.
 
 Create a file called Snakefile. Snakemake always searches for a file called Snakefile.
@@ -31,13 +31,23 @@ the shell section by enclosing it in curly braces. Please fix that now.
 
 ## Running a rule
 Before running a rule, always check whether it will work and what will happen:
-`snakemake -n`. If you see red, something is wrong and needs fixing.
 
-To run a rule, simply run ``snakemake --cores 2`.
+```bash
+snakemake -n
+```
+
+If you see red, something is wrong and needs fixing.
+
+To run a rule, simply run 
+
+```bash
+snakemake --cores 2
+```
 
 You can replace the number of cores with however many you have handy or want to give the job.
 
 If you have multiple Snakefiles, you can choose the Snakefile you want to run with "-s" or "--snakefile" 
+
 ```bash
 snakemake -s other_snakefile
 ```
@@ -80,9 +90,11 @@ rule modify_and_reverse:
         echo " I made my first rule!" >> {output}
         """
 ```
+
 Notice how each input "object" now has an attribute that we can reference by name.
 
 Borrowing from the Snakemake tutorial is the following rule:
+
 ```
 rule bwa_map:
     input:
@@ -93,6 +105,7 @@ rule bwa_map:
     shell:
         "bwa mem {input} | samtools view -Sb - > {output}"
 ```
+
 Notice how all the input files can be provided at once to bwa mem simply with {input}
 
 NOTE:
